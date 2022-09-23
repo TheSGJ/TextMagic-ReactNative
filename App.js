@@ -10,30 +10,32 @@ import {
   Button,
   Pressable,
   Platform,
-  TouchableOpacity
+  TouchableOpacity,
+  ScrollView
 } from "react-native";
 export default function App() {
-  const [text, setText] = React.useState("");
+  const [textPreview, setTextPreview] = useState("");
   const handleOnChange = (event) => {
-    setText(event.target.value);
+    setTextPreview(event.target.value);
   };
-  const handleUpClick = () => {
-    let newText = text.toUpperCase();
-    setText(newText);
-  };
+
   const handleClearText = () => {
-    let newText = "";
-    setText(newText);
+    let clearText = "";
+    setTextPreview(clearText);
   };
+ 
   return (
     <>
       <SafeAreaView style={styles.container}>
         <StatusBar style="auto" />
+        <Appbar.Header style={{ background: '#87CEEB' }}>
+        <Appbar.Content title="TextMagic" />
+        </Appbar.Header>
         <View style={styles.textAreaContainer}>
           <TextInput
             style={styles.textArea}
             onChange={handleOnChange}
-            value={text}
+            value={textPreview}
             underlineColorAndroid="transparent"
             placeholder="Type something..."
             placeholderTextColor="black"
@@ -49,22 +51,23 @@ export default function App() {
             <TouchableOpacity onPress={handleClearText} style={styles.button}>
               <Text style={styles.textStyle}>🗑️ Clear</Text>
             </TouchableOpacity>
-          </View>
-          <View style={styles.textForm}>
-            <TouchableOpacity onPress={handleUpClick} style={styles.button}>
-              <Text style={styles.textStyle}>Set to Uppercase</Text>
-            </TouchableOpacity>
+          
             </View>
             
           </View>
         </View>
       </SafeAreaView>
-      <Text style={{ textAlign: "center", fontWeight: "bold", fontSize: 22 }}>
+      <SafeAreaView>
+      <ScrollView scrollEnabled={true}>
+        <View>
+      <Text style={{ textAlign: "center", fontWeight: "bold", fontSize: 22, marginTop:10 }}>
         Text Preview:
       </Text>
-      <View style={styles.textPreview}>{text.length > 0 ? text : "Nothing to preview!"}</View>
-
-      <Button disabled={true}></Button>
+        </View>
+      <View style={styles.textPreview}><Text>{textPreview}</Text></View>
+      </ScrollView>
+      </SafeAreaView>
+      <Button title='TextMagic - Dev Version v1.0.1' disabled={true}></Button>
     </>
   );
 }
@@ -85,7 +88,7 @@ const styles = StyleSheet.create({
   textArea: {
     height: 150,
     justifyContent: "flex-start",
-    fontSize: 22,
+    fontSize: 18,
   },
   textPreview: {
     flex: 1,
@@ -93,6 +96,8 @@ const styles = StyleSheet.create({
     // justifyContent: 'center',
     textAlign: "center",
     fontSize: 19,
+    marginLeft: 18,
+    marginRight:18,
   },
   button: {
     borderRadius: 20,
@@ -114,6 +119,8 @@ const styles = StyleSheet.create({
   buttonPlot: {
     alignItems: 'center',
     fontSize: 19,
+    paddingTop: 8,
+    paddingBottom: 20
   },
   btnBox: {
     flexDirection: 'row',
