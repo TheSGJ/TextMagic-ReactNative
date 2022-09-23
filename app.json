@@ -24,7 +24,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.socialnmobile.dictapps.textmagic"
     },
     "web": {
       "favicon": "./assets/favicon.png"
